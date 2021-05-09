@@ -1,0 +1,47 @@
+@startuml
+scale 1920 width
+
+[*]	-->	Locked_No_ED_InCar	#pink
+[*]	-->	Locked_ED正_InCar	#pink
+[*]	-->	Locked_ED副_InCar	#pink
+[*]	-->	Locked_ED正副_InCar	#pink
+
+Locked_ED正副_InCar	#pink	-->	Unlocked_ED正外副内	:	ED正 下车
+Locked_ED正副_InCar	#pink	-->	Unlocked_ED正内副外	:	ED副 下车
+
+Locked_ED副_InCar	#pink	-[#blue,dotted]>	Unlocked_ED正外副内	:	ED正 靠近
+Locked_ED正_InCar	#pink	-[#blue,dotted]>	Unlocked_ED正内副外	:	ED副 靠近
+Locked_No_ED_InCar	#pink	-[#blue,dotted]>	Unlocked_仅ED副_NearCar	:	ED副 靠近
+Locked_No_ED_InCar	#pink	-[#blue,dotted]>	Unlocked_仅ED正_NearCar	:	ED正 靠近
+
+Unlocked_ED正内副外	-->	Unlocked_ED正副_InCar	:	ED副 进车
+Unlocked_ED正内副外	-->	Unlocked_ED正副_NearCar	:	ED正 下车
+Unlocked_ED正内副外	-[#green,dashed]->	Locked_ED正_InCar	#pink	:	ED副 远离
+
+Unlocked_ED正副_InCar	-->	Unlocked_ED正内副外	:	ED副 下车
+Unlocked_ED正副_InCar	-->	Unlocked_ED正外副内	:	ED正 下车
+
+Unlocked_ED正副_NearCar	-->	Unlocked_ED正内副外	:	ED正 进车
+Unlocked_ED正副_NearCar	-->	Unlocked_ED正外副内	:	ED副 进车
+Unlocked_ED正副_NearCar	-->	Unlocked_仅ED副_NearCar	:	ED正 远离
+Unlocked_ED正副_NearCar	-->	Unlocked_仅ED正_NearCar	:	ED副 远离
+
+Unlocked_ED正外副内	-->	Unlocked_ED正副_InCar	:	ED正 进车
+Unlocked_ED正外副内	-->	Unlocked_ED正副_NearCar	:	ED副 下车
+Unlocked_ED正外副内	-[#green,dashed]->	Locked_ED副_InCar	#pink	:	ED正 远离
+
+Unlocked_仅ED副_InCar	-->	Unlocked_ED正外副内	:	ED正 靠近
+Unlocked_仅ED副_InCar	-->	Unlocked_仅ED副_NearCar	:	ED副 下车
+
+Unlocked_仅ED副_NearCar	-[#green,dashed]->	Locked_No_ED_InCar	#pink	:	ED副 远离
+Unlocked_仅ED副_NearCar	-->	Unlocked_ED正副_NearCar	:	ED正 靠近
+Unlocked_仅ED副_NearCar	-->	Unlocked_仅ED副_InCar	:	ED副 进车
+
+Unlocked_仅ED正_InCar	-->	Unlocked_ED正内副外	:	ED副 靠近
+Unlocked_仅ED正_InCar	-->	Unlocked_仅ED正_NearCar	:	ED正 下车
+
+Unlocked_仅ED正_NearCar	-[#green,dashed]->	Locked_No_ED_InCar	#pink	:	ED正 远离
+Unlocked_仅ED正_NearCar	-->	Unlocked_ED正副_NearCar	:	ED副 靠近
+Unlocked_仅ED正_NearCar	-->	Unlocked_仅ED正_InCar	:	ED正 进车
+@enduml
+
